@@ -1,1 +1,22 @@
+version : '3.1'
+
 services:
+  db:
+    image: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: develop
+      MYSQL_ROOT_PASSWORD: dev1234
+    volumes:
+      - mysqldb:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8090:8080"
+
+volumes:
+  mysqldb:

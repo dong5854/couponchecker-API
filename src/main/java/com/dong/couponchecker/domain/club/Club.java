@@ -18,7 +18,7 @@ public class Club {
     private String name;
     @Column(nullable = false)
     private String password;
-    @OneToMany
+    @OneToMany(mappedBy = "club")
     private List<Coupon> coupons = new ArrayList<>();
     @ManyToMany
     private List<User> users = new ArrayList<>();

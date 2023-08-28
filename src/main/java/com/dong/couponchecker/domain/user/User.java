@@ -21,9 +21,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany
+    @OneToMany(mappedBy = "uploader")
     private List<Coupon> uploadedCoupons = new ArrayList<>();
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<Coupon> usedCoupons = new ArrayList<>();
     @ManyToMany
     private List<Club> clubs = new ArrayList<>();

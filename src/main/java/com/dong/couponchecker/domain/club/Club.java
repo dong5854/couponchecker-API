@@ -9,6 +9,7 @@ import org.hibernate.annotations.*;
 import java.util.*;
 import java.time.*;
 
+@Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 @Entity
 public class Club {
@@ -24,5 +25,9 @@ public class Club {
     private List<User> users = new ArrayList<>();
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    public void addCoupons(Coupon coupon) {
+        coupon.setClub(this);
+    }
 }
 

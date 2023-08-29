@@ -9,6 +9,7 @@ import org.hibernate.annotations.*;
 import java.util.*;
 import java.time.*;
 
+@Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 @Entity
 public class User {
@@ -29,4 +30,12 @@ public class User {
     private List<Club> clubs = new ArrayList<>();
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    public void addUploadedCoupons(Coupon coupon) {
+        coupon.setUploader(this);
+    }
+
+    public void addUsedCoupons(Coupon coupon) {
+        coupon.setUser(this);
+    }
 }

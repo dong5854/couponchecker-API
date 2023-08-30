@@ -9,7 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.*;
 
 @Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Coupon {
     @Id @GeneratedValue
@@ -51,5 +51,16 @@ public class Coupon {
         }
         this.user = user;
         user.getUsedCoupons().add(this);
+    }
+
+    @Builder
+    public Coupon(String name, String url, LocalDateTime createdAt, LocalDateTime usedAt, User uploader, Club club, User user) {
+        this.name = name;
+        this.url = url;
+        this.createdAt = createdAt;
+        this.usedAt = usedAt;
+        this.uploader = uploader;
+        this.club = club;
+        this.user = user;
     }
 }

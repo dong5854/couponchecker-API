@@ -52,13 +52,10 @@ public class Coupon {
     }
 
     @Builder
-    public Coupon(String name, String url, LocalDateTime createdAt, LocalDateTime usedAt, User uploader, Club club, User user) {
+    public Coupon(String name, String url, User uploader, Club club) {
         this.name = name;
         this.url = url;
-        this.createdAt = createdAt;
-        this.usedAt = usedAt;
         this.uploader = uploader;
         this.club = club;
-        this.user = user;
     }
 }

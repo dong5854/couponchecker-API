@@ -1,7 +1,5 @@
-package com.dong.couponchecker.domain.club;
+package com.dong.couponchecker.domain;
 
-import com.dong.couponchecker.domain.coupon.Coupon;
-import com.dong.couponchecker.domain.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.*;

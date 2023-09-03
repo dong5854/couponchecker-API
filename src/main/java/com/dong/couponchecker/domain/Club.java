@@ -19,8 +19,8 @@ public class Club {
     private String password;
     @OneToMany(mappedBy = "club")
     private List<Coupon> coupons = new ArrayList<>();
-    @ManyToMany
-    private List<User> users = new ArrayList<>();
+    @OneToMany(mappedBy = "club")
+    private List<UserClub> userClubs = new ArrayList<>();
     @CreationTimestamp
     private LocalDateTime createdAt;
 

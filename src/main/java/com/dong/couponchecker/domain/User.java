@@ -1,7 +1,5 @@
 package com.dong.couponchecker.domain;
 
-import com.dong.couponchecker.domain.Coupon;
-import com.dong.couponchecker.domain.Club;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.*;
@@ -26,8 +24,8 @@ public class User {
     private List<Coupon> uploadedCoupons = new ArrayList<>();
     @OneToMany(mappedBy = "user")
     private List<Coupon> usedCoupons = new ArrayList<>();
-    @ManyToMany
-    private List<Club> clubs = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<UserClub> userClubs = new ArrayList<>();
     @CreationTimestamp
     private LocalDateTime createdAt;
 
@@ -37,5 +35,13 @@ public class User {
 
     public void addUsedCoupons(Coupon coupon) {
         coupon.setUser(this);
+    }
+
+    @Builder
+    public User(long id, String email, String name, String password) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.password = password;
     }
 }

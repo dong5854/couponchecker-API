@@ -9,13 +9,13 @@ import java.time.LocalDateTime;
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 @Entity
-public class UserClub {
+public class MemberClub {
 
     @Id @GeneratedValue
     private long id;
 
     @ManyToOne
-    private User user;
+    private Member member;
 
     @ManyToOne
     private Club club;

@@ -10,10 +10,10 @@ import java.time.*;
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 @Entity
-public class User {
+public class Member {
     @Id @GeneratedValue
     private long id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
     private String name;
@@ -24,8 +24,8 @@ public class User {
     private List<Coupon> uploadedCoupons = new ArrayList<>();
     @OneToMany(mappedBy = "user")
     private List<Coupon> usedCoupons = new ArrayList<>();
-    @OneToMany(mappedBy = "user")
-    private List<UserClub> userClubs = new ArrayList<>();
+    @OneToMany(mappedBy = "member")
+    private List<MemberClub> userClubs = new ArrayList<>();
     @CreationTimestamp
     private LocalDateTime createdAt;
 
@@ -38,8 +38,7 @@ public class User {
     }
 
     @Builder
-    public User(long id, String email, String name, String password) {
-        this.id = id;
+    public Member(String email, String name, String password) {
         this.email = email;
         this.name = name;
         this.password = password;

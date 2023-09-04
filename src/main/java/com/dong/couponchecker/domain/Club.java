@@ -20,7 +20,7 @@ public class Club {
     @OneToMany(mappedBy = "club")
     private List<Coupon> coupons = new ArrayList<>();
     @OneToMany(mappedBy = "club")
-    private List<UserClub> userClubs = new ArrayList<>();
+    private List<MemberClub> userClubs = new ArrayList<>();
     @CreationTimestamp
     private LocalDateTime createdAt;
 

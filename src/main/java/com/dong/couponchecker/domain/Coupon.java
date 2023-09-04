@@ -20,14 +20,14 @@ public class Coupon {
     private LocalDateTime createdAt;
     private LocalDateTime usedAt;
     @ManyToOne
-    private User uploader;
+    private Member uploader;
     @ManyToOne
     private Club club;
     // 일반적인 '유저'(user)가 아닌 '쿠폰을 사용한 사람'(user)라는 의미
     @ManyToOne
-    private User user;
+    private Member user;
 
-    public void setUploader(User user) {
+    public void setUploader(Member user) {
         if(this.user != null) {
             this.user.getUploadedCoupons().remove(this);
         }
@@ -43,7 +43,7 @@ public class Coupon {
         club.getCoupons().add(this);
     }
 
-    public void setUser(User user) {
+    public void setUser(Member user) {
         if(this.user != null) {
             this.user.getUsedCoupons().remove(this);
         }
@@ -52,7 +52,7 @@ public class Coupon {
     }
 
     @Builder
-    public Coupon(String name, String url, User uploader, Club club) {
+    public Coupon(String name, String url, Member uploader, Club club) {
         this.name = name;
         this.url = url;
         this.uploader = uploader;

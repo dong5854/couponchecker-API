@@ -60,6 +60,20 @@ public class MemberRepositoryTest {
 
     @Test
     public void testMemberDelete() {
-        // Test deleting an existing entity
+        // given
+        Member testUser = Member.builder().
+                email("test@email.com").
+                name("김테스트").
+                password("test1234!@#").
+                build();
+
+        memberRepository.save(testUser);
+
+        // when
+        memberRepository.deleteMemberByEmail("test@email.com");
+
+        // then
+        Member removedMember = memberRepository.findByEmail("test@email.com");
+        assertThat(removedMember).isNull();
     }
 }

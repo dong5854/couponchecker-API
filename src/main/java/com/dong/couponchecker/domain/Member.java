@@ -20,11 +20,11 @@ public class Member {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "uploader")
+    @OneToMany(mappedBy = "uploader", fetch = FetchType.LAZY)
     private List<Coupon> uploadedCoupons = new ArrayList<>();
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Coupon> usedCoupons = new ArrayList<>();
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<MemberClub> userClubs = new ArrayList<>();
     @CreationTimestamp
     private LocalDateTime createdAt;

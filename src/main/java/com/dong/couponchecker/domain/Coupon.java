@@ -19,12 +19,12 @@ public class Coupon {
     @CreationTimestamp
     private LocalDateTime createdAt;
     private LocalDateTime usedAt;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Member uploader;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Club club;
     // 일반적인 '유저'(user)가 아닌 '쿠폰을 사용한 사람'(user)라는 의미
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Member user;
 
     public void setUploader(Member user) {

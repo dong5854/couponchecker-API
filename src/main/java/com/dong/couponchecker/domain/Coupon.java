@@ -25,14 +25,14 @@ public class Coupon {
     private Club club;
     // 일반적인 '유저'(user)가 아닌 '쿠폰을 사용한 사람'(user)라는 의미
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private Member user;
+    private Member member;
 
-    public void setUploader(Member user) {
-        if(this.user != null) {
-            this.user.getUploadedCoupons().remove(this);
+    public void setUploader(Member member) {
+        if(this.member != null) {
+            this.member.getUploadedCoupons().remove(this);
         }
-        this.user = user;
-        user.getUploadedCoupons().add(this);
+        this.member = member;
+        member.getUploadedCoupons().add(this);
     }
 
     public void setClub(Club club) {
@@ -43,19 +43,19 @@ public class Coupon {
         club.getCoupons().add(this);
     }
 
-    public void setUser(Member user) {
-        if(this.user != null) {
-            this.user.getUsedCoupons().remove(this);
+    public void setUser(Member member) {
+        if(this.member != null) {
+            this.member.getUsedCoupons().remove(this);
         }
-        this.user = user;
-        user.getUsedCoupons().add(this);
+        this.member = member;
+        member.getUsedCoupons().add(this);
     }
 
     @Builder
     public Coupon(String name, String url, Member uploader, Club club) {
         this.name = name;
         this.url = url;
-        this.uploader = uploader;
-        this.club = club;
+        this.setUploader(uploader);
+        this.setClub(club);
     }
 }

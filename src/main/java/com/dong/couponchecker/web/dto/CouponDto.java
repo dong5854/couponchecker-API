@@ -5,9 +5,9 @@ import lombok.*;
 @ToString
 @Getter
 @RequiredArgsConstructor
-public class CouponCreateDto {
+public class CouponDto {
     private final String name;
     private final String url;
-    private final String uploaderId;
-    private final String groupId;
+    private final long uploaderId;
+    private final long clubId;
 }

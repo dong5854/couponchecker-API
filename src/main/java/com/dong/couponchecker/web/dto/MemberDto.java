@@ -4,9 +4,9 @@ import lombok.*;
 
 @Getter
 public class MemberDto {
-    private String email;
-    private String name;
-    private String password;
+    private final String email;
+    private final String name;
+    private final String password;
 
     @Builder
     public MemberDto(String email, String name, String password) {

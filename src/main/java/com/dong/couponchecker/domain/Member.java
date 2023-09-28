@@ -25,7 +25,7 @@ public class Member {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Coupon> usedCoupons = new ArrayList<>();
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-    private List<MemberClub> userClubs = new ArrayList<>();
+    private List<MemberClub> memberClubs = new ArrayList<>();
     @CreationTimestamp
     private LocalDateTime createdAt;
 
@@ -36,6 +36,7 @@ public class Member {
     public void addUsedCoupons(Coupon coupon) {
         coupon.setUser(this);
     }
+    public void addMemberClubs(MemberClub memberClub) { memberClubs.add(memberClub);}
 
     @Builder
     public Member(String email, String name, String password) {

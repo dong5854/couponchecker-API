@@ -3,12 +3,11 @@ package com.dong.couponchecker.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Fetch;
 
 import java.time.LocalDateTime;
 
 @Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class MemberClub {
 
@@ -23,4 +22,11 @@ public class MemberClub {
 
     @CreationTimestamp
     private LocalDateTime joinedAt;
+
+    public MemberClub(Member member, Club club) {
+        member.addMemberClubs(this);
+        club.addMemberClub(this);
+        this.member = member;
+        this.club = club;
+    }
 }

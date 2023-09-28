@@ -20,12 +20,15 @@ public class Club {
     @OneToMany(mappedBy = "club", fetch = FetchType.LAZY)
     private List<Coupon> coupons = new ArrayList<>();
     @OneToMany(mappedBy = "club", fetch = FetchType.LAZY)
-    private List<MemberClub> userClubs = new ArrayList<>();
+    private List<MemberClub> memberClubs = new ArrayList<>();
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     public void addCoupons(Coupon coupon) {
         coupon.setClub(this);
     }
+    public void addMemberClub(MemberClub memberClub) { this.memberClubs.add(memberClub); }
+    public void addMember(Member member) {
+        new MemberClub(member, this);
+    }
 }
-

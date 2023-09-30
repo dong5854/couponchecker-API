@@ -1,6 +1,5 @@
 package com.dong.couponchecker.web;
 
-import com.dong.couponchecker.domain.MemberRepository;
 import com.dong.couponchecker.domain.service.MemberService;
 import com.dong.couponchecker.exception.UnexpectedException;
 import com.dong.couponchecker.web.dto.MemberDto;

@@ -1,5 +1,6 @@
 package com.dong.couponchecker.domain;
 
+import com.dong.couponchecker.web.dto.CouponDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -49,6 +50,10 @@ public class Coupon {
         }
         this.member = member;
         member.getUsedCoupons().add(this);
+    }
+
+    public CouponDto toDto() {
+        return new CouponDto(this.name, this.url, this.uploader.getId(), this.club.getId());
     }
 
     @Builder

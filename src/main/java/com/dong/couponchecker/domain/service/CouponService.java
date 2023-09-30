@@ -20,7 +20,7 @@ public class CouponService {
     private final ClubRepository clubRepository;
     private final MemberRepository memberRepository;
 
-    void postCoupon(CouponDto couponDto) throws DataNotFoundException {
+    public void postCoupon(CouponDto couponDto) throws DataNotFoundException {
         // TODO: S3 버킷에 업로드 후 해당 url을 넣도록 변경, as-is: "dummyUrl"
         Optional<Member> uploader = memberRepository.findById(couponDto.getUploaderId());
         if (uploader.isEmpty()) throw new DataNotFoundException();
@@ -33,7 +33,7 @@ public class CouponService {
                 club(club.get()).build();
         couponRepository.save(coupon);
     }
-    List<Coupon> findAllByUploader(MemberDto memberDto) throws DataNotFoundException, UnexpectedException {
+    public List<Coupon> findAllByUploader(MemberDto memberDto) throws DataNotFoundException, UnexpectedException {
         Member uploader = Member.builder()
                 .name(memberDto.getName())
                 .email(memberDto.getEmail())
@@ -43,7 +43,7 @@ public class CouponService {
         if (coupons.isEmpty()) throw new DataNotFoundException();
         return coupons.get();
     }
-    List<Coupon> findAllByClub(long clubId) throws DataNotFoundException {
+    public List<Coupon> findAllByClubId(long clubId) throws DataNotFoundException {
         Optional<Club> club = clubRepository.findById(clubId);
         if (club.isEmpty()) throw new DataNotFoundException();
         Optional<List<Coupon>> coupons = couponRepository.findAllByClub(club.get());

@@ -22,7 +22,7 @@ public class Member {
 
     @OneToMany(mappedBy = "uploader", fetch = FetchType.LAZY)
     private List<Coupon> uploadedCoupons = new ArrayList<>();
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "memberWhoUsed", fetch = FetchType.LAZY)
     private List<Coupon> usedCoupons = new ArrayList<>();
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<MemberClub> memberClubs = new ArrayList<>();
@@ -34,7 +34,7 @@ public class Member {
     }
 
     public void addUsedCoupons(Coupon coupon) {
-        coupon.setUser(this);
+        coupon.setMemberWhoUsed(this);
     }
     public void addMemberClubs(MemberClub memberClub) { memberClubs.add(memberClub);}
 

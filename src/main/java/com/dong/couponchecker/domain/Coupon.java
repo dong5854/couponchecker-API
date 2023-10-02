@@ -3,12 +3,14 @@ package com.dong.couponchecker.domain;
 import com.dong.couponchecker.web.dto.CouponDto;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.*;
 
 @Getter @Setter
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Coupon {
     @Id @GeneratedValue
@@ -17,23 +19,24 @@ public class Coupon {
     private String name;
     @Column(nullable = false)
     private String url;
-    @CreationTimestamp
+    @CreatedDate
+    @Column(updatable = false)
     private LocalDateTime createdAt;
     private LocalDateTime usedAt;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Member uploader;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Club club;
-    // 일반적인 '유저'(user)가 아닌 '쿠폰을 사용한 사람'(user)라는 의미
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private Member member;
 
-    public void setUploader(Member member) {
-        if(this.member != null) {
-            this.member.getUploadedCoupons().remove(this);
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member memberWhoUsed;
+
+    public void setUploader(Member uploader) {
+        if(this.uploader != null) {
+            this.uploader.getUploadedCoupons().remove(this);
         }
-        this.member = member;
-        member.getUploadedCoupons().add(this);
+        this.uploader = uploader;
+        uploader.getUploadedCoupons().add(this);
     }
 
     public void setClub(Club club) {
@@ -44,12 +47,13 @@ public class Coupon {
         club.getCoupons().add(this);
     }
 
-    public void setUser(Member member) {
-        if(this.member != null) {
-            this.member.getUsedCoupons().remove(this);
+    public void setMemberWhoUsed(Member memberWhoUsed) {
+        if(this.memberWhoUsed != null) {
+            this.memberWhoUsed.getUsedCoupons().remove(this);
         }
-        this.member = member;
-        member.getUsedCoupons().add(this);
+        this.memberWhoUsed = memberWhoUsed;
+        this.usedAt =  LocalDateTime.now();
+        memberWhoUsed.getUsedCoupons().add(this);
     }
 
     public CouponDto toDto() {

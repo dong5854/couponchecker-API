@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Profile;
 
 import java.util.Optional;
 
@@ -49,13 +50,14 @@ public class MemberRepositoryTest {
         memberRepository.save(testUser);
 
         // when
-        Member savedMember = memberRepository.findByEmail("test@email.com");
-        savedMember.setName("김업데이트");
-        memberRepository.save(savedMember);
+        Optional<Member> savedMember = memberRepository.findByEmail("test@email.com");
+        savedMember.get().setName("김업데이트");
+        memberRepository.save(savedMember.get());
 
         // then
-        Member updatedMember = memberRepository.findByEmail("test@email.com");
-        assertThat(updatedMember.getName()).isEqualTo("김업데이트");
+        Optional<Member> updatedMember = memberRepository.findByEmail("test@email.com");
+        assertThat(updatedMember.isPresent()).isTrue();
+        assertThat(updatedMember.get().getName()).isEqualTo("김업데이트");
     }
 
     @Test
@@ -73,7 +75,7 @@ public class MemberRepositoryTest {
         memberRepository.deleteMemberByEmail("test@email.com");
 
         // then
-        Member removedMember = memberRepository.findByEmail("test@email.com");
-        assertThat(removedMember).isNull();
+        Optional<Member> removedMember = memberRepository.findByEmail("test@email.com");
+        assertThat(removedMember.isPresent()).isFalse();
     }
 }

@@ -31,4 +31,9 @@ public class Club {
     public void addMember(Member member) {
         new MemberClub(member, this);
     }
+
+    public Club(String name, String password) {
+        this.name = name;
+        this.password = password;
+    }
 }

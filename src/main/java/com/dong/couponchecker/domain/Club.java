@@ -21,7 +21,7 @@ public class Club {
     private String password;
     @OneToMany(mappedBy = "club", fetch = FetchType.LAZY)
     private List<Coupon> coupons = new ArrayList<>();
-    @OneToMany(mappedBy = "club", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "club", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<MemberClub> memberClubs = new ArrayList<>();
     @CreatedDate
     private LocalDateTime createdAt;

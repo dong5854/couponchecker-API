@@ -29,7 +29,6 @@ public class Club {
     public void addCoupons(Coupon coupon) {
         coupon.setClub(this);
     }
-    public void addMemberClub(MemberClub memberClub) { this.memberClubs.add(memberClub); }
     public void addMember(Member member) {
         new MemberClub(member, this);
     }
